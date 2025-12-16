@@ -1,0 +1,20 @@
+{
+  "current_tab": 0,
+  "noise_type": 0,
+  "noise_intensity": 0.1,
+  "geom_type": 0,
+  "rotation_angle": 15,
+  "scale_factor": 0.8,
+  "translation_x": 10,
+  "translation_y": 10,
+  "shear_x": 0.1,
+  "shear_y": 0.1,
+  "flip_code": 0,
+  "color_type": 0,
+  "binary_threshold": 127,
+  "num_copies": 5,
+  "train_split": 70,
+  "val_split": 15,
+  "test_split": 15,
+  "language": "en"
+}

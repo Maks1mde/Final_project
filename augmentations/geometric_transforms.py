@@ -1,5 +1,5 @@
 """
-Исправленный модуль геометрических преобразований
+Модуль геометрических преобразований
 """
 
 import numpy as np
@@ -8,7 +8,7 @@ from .base_augmentation import BaseAugmentation
 
 
 class GeometricAugmentation(BaseAugmentation):
-    """Класс для геометрических преобразований с исправлениями"""
+    """Класс для геометрических преобразований"""
 
     def __init__(self):
         super().__init__()
@@ -215,5 +215,6 @@ class GeometricAugmentation(BaseAugmentation):
         # Применить перспективное преобразование
         perspective = cv2.warpPerspective(image, matrix, (w, h),
                                           borderMode=cv2.BORDER_REFLECT)
+
 
         return perspective

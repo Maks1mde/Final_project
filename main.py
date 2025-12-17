@@ -1,7 +1,3 @@
-"""
-Обновленный main.py с корректным подключением переводов
-"""
-
 import sys
 import os
 import traceback
@@ -44,10 +40,8 @@ def main():
     else:
         translations.set_language("en")
 
-    # Установить иконку приложения
     try:
         if hasattr(sys, '_MEIPASS'):
-            # Для PyInstaller
             icon_path = os.path.join(sys._MEIPASS, 'icon.ico')
         else:
             icon_path = 'icon.ico'
@@ -71,4 +65,5 @@ def main():
         return 1
 
 if __name__ == "__main__":
+
     main()

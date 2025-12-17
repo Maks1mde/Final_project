@@ -1,7 +1,3 @@
-"""
-Обновленный gui/main_window.py с добавлением выбора изображения для превью
-"""
-
 from PyQt5.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
                              QPushButton, QLabel, QFileDialog, QListWidget,
                              QTabWidget, QGroupBox, QSpinBox, QDoubleSpinBox,
@@ -27,7 +23,6 @@ import translations
 from augmentations.augmentor import ImageAugmentor
 
 class ImageLabel(QLabel):
-    """Кастомный QLabel для изображений с фиксированным масштабированием"""
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -119,7 +114,7 @@ class AugmentationThread(QThread):
         self.total_count = 0
 
     def generate_unique_name(self, original_name, aug_params, copy_index):
-        """Генерировать уникальное логичное имя файла"""
+
         base_name = Path(original_name).stem
 
         # Создать описательную часть имени на основе параметров аугментации
@@ -198,7 +193,6 @@ class AugmentationThread(QThread):
                                 print(f"Error applying augmentation {aug_type}: {e}")
                                 continue
 
-                        # Сгенерировать уникальное логичное имя
                         new_name = self.generate_unique_name(
                             img_path.name, self.augmentations, i)
                         save_path = self.output_dir / new_name
@@ -283,7 +277,7 @@ class AugmentationApp(QMainWindow):
 
         data_layout.addLayout(dir_layout)
 
-        # Выбор конкретного изображения для превью (НОВОЕ)
+        # Выбор конкретного изображения для превью
         image_layout = QHBoxLayout()
         self.image_label = QLabel()
         self.image_label.setWordWrap(True)
@@ -295,7 +289,7 @@ class AugmentationApp(QMainWindow):
 
         data_layout.addLayout(image_layout)
 
-        # Список изображений в директории (НОВОЕ)
+        # Список изображений в директории
         self.image_list = QListWidget()
         self.image_list.setMaximumHeight(150)
         self.image_list.itemClicked.connect(self.on_image_selected)
@@ -771,8 +765,6 @@ class AugmentationApp(QMainWindow):
         else:
             event.ignore()
 
-    # НОВЫЕ МЕТОДЫ ДЛЯ ВЫБОРА ИЗОБРАЖЕНИЯ
-
     def select_directory(self):
         """Выбрать директорию с изображениями"""
         try:
@@ -1022,7 +1014,7 @@ class AugmentationApp(QMainWindow):
             augmentations = self.get_current_augmentations()
             num_copies = self.num_copies.value()
 
-            # Создать поток аугментации с улучшенными именами файлов
+            # Создать поток аугментации
             self.augmentation_thread = AugmentationThread(
                 self.augmentor, self.input_dir, self.output_dir,
                 augmentations, num_copies
@@ -1075,7 +1067,7 @@ class AugmentationApp(QMainWindow):
     def on_augmentation_error(self, error_msg):
         """Обработка ошибки аугментации"""
         self.log_text.append(f"Error: {error_msg}")
-        self.progress_label.setText("Error")  # НОВОЕ
+        self.progress_label.setText("Error")
         QMessageBox.critical(
             self,
             self.translation_manager.tr("error"),
@@ -1166,4 +1158,5 @@ class AugmentationApp(QMainWindow):
                 self,
                 self.translation_manager.tr("error"),
                 f"Failed to save: {e}"
+
             )
